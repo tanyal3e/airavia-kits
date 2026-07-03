@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import LogoColorImport from "@/imports/LogoColor/index";
-import LogotypeColorImport from "@/imports/LogotypeColor/index";
+import { AiraviaLogo } from "./components/AiraviaLogo";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as Accordion from "@radix-ui/react-accordion";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
@@ -16,52 +15,6 @@ import {
 } from "lucide-react";
 import { SiteTemplate } from "./components/SiteTemplate";
 
-// ─── Logo wrapper components ───────────────────────────────────────────────
-// Mark only (no wordmark) — for compact / icon contexts
-function AirbridgeMark({ height = 36 }: { height?: number }) {
-  const REGION_W = 1161, REGION_H = 532;
-  const CANVAS_W = 1440, CANVAS_H = 770;
-  const scale = height / REGION_H;
-  const displayW = Math.round(REGION_W * scale);
-  return (
-    <div style={{ width: displayW, height, overflow: "hidden", position: "relative", flexShrink: 0 }}>
-      <div style={{
-        position: "absolute",
-        left: -178 * scale,
-        top: -120 * scale,
-        width: CANVAS_W,
-        height: CANVAS_H,
-        transform: `scale(${scale})`,
-        transformOrigin: "top left",
-      }}>
-        <LogoColorImport />
-      </div>
-    </div>
-  );
-}
-
-// Full color logotype (mark + wordmark) — header / footer / hero
-function AirbridgeLogotype({ height = 40 }: { height?: number }) {
-  const REGION_W = 2688, REGION_H = 529;
-  const CANVAS_W = 3000, CANVAS_H = 780;
-  const scale = height / REGION_H;
-  const displayW = Math.round(REGION_W * scale);
-  return (
-    <div style={{ width: displayW, height, overflow: "hidden", position: "relative", flexShrink: 0 }}>
-      <div style={{
-        position: "absolute",
-        left: -144 * scale,
-        top: -124 * scale,
-        width: CANVAS_W,
-        height: CANVAS_H,
-        transform: `scale(${scale})`,
-        transformOrigin: "top left",
-      }}>
-        <LogotypeColorImport />
-      </div>
-    </div>
-  );
-}
 
 // ─── Section nav ───────────────────────────────────────────────────────────
 const NAV_SECTIONS = [
@@ -611,9 +564,7 @@ export default function App() {
           <div className="max-w-screen-xl mx-auto px-6 h-14 flex items-center gap-4">
             {/* Logo */}
             <div className="flex items-center gap-3 shrink-0">
-              <div className="bg-white rounded px-2.5 py-1 flex items-center">
-                <AirbridgeLogotype height={28} />
-              </div>
+              <AiraviaLogo height={28} />
             </div>
 
             {/* View tabs */}
@@ -1083,8 +1034,8 @@ export default function App() {
             <div className="bg-[#001F6B] rounded p-8 flex flex-col sm:flex-row items-center gap-6">
               <AirbridgeMascot size={100} mood="waving" />
               <div className="text-center sm:text-left">
-                <div className="bg-white rounded px-2.5 py-1 inline-flex mb-3">
-                  <AirbridgeLogotype height={24} />
+                <div className="inline-flex mb-3">
+                  <AiraviaLogo height={24} />
                 </div>
                 <p className="text-white/40 text-xs font-bold tracking-widest uppercase mb-1">Brand Character</p>
                 <h3 className="text-xl font-bold text-white">Meet Sky</h3>
@@ -1190,7 +1141,9 @@ export default function App() {
           {/* Footer */}
           <footer className="pt-10 pb-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground border-t border-border">
             <div className="flex items-center gap-3">
-              <AirbridgeLogotype height={22} />
+              <div className="bg-[#001F6B] rounded px-2.5 py-1 flex items-center">
+                <AiraviaLogo height={18} />
+              </div>
               <span className="text-muted-foreground">v2.1.0</span>
             </div>
             <span>Hanken Grotesk · Tailwind CSS 4 · Radix UI · Lucide</span>

@@ -1,19 +1,6 @@
 import React from "react";
-import LogotypeColorImport from "@/imports/LogotypeColor/index";
+import { AiraviaLogo } from "./AiraviaLogo";
 import { useLocale, LOCALES, LOCALE_LABELS, type Locale } from "./i18n";
-
-function AiraviaLogotype({ height = 24 }: { height?: number }) {
-  const REGION_W = 2688, REGION_H = 529, CANVAS_W = 3000, CANVAS_H = 780;
-  const scale = height / REGION_H;
-  return (
-    <div style={{ width: Math.round(REGION_W * scale), height, overflow: "hidden", position: "relative", flexShrink: 0 }}>
-      <div className="[&_.bg-white]:!bg-transparent brightness-0 invert"
-        style={{ position: "absolute", left: -144 * scale, top: -124 * scale, width: CANVAS_W, height: CANVAS_H, transform: `scale(${scale})`, transformOrigin: "top left" }}>
-        <LogotypeColorImport />
-      </div>
-    </div>
-  );
-}
 
 type FooterCol = { heading: string; links: string[] };
 
@@ -54,7 +41,7 @@ export function SiteFooter() {
         <div className="flex gap-6 pb-8" style={{ borderBottom: "0.625px solid rgba(255,255,255,0.1)" }}>
           {/* Brand col */}
           <div className="flex flex-col gap-2 w-[389px] shrink-0">
-            <AiraviaLogotype height={24} />
+            <AiraviaLogo height={24} />
             <p className="text-[14px] font-normal leading-[22.75px] text-white/50">{t("footer_tagline")}</p>
           </div>
           {/* Link columns */}

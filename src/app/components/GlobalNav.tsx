@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-import LogotypeColorImport from "@/imports/LogotypeColor/index";
+import { AiraviaLogo } from "./AiraviaLogo";
 import { useLocale, LOCALES, LOCALE_LABELS, type Locale } from "./i18n";
-
-function AiraviaLogotype({ height = 24 }: { height?: number }) {
-  const REGION_W = 2688, REGION_H = 529, CANVAS_W = 3000, CANVAS_H = 780;
-  const scale = height / REGION_H;
-  return (
-    <div style={{ width: Math.round(REGION_W * scale), height, overflow: "hidden", position: "relative", flexShrink: 0 }}>
-      <div className="[&_.bg-white]:!bg-transparent brightness-0 invert"
-        style={{ position: "absolute", left: -144 * scale, top: -124 * scale, width: CANVAS_W, height: CANVAS_H, transform: `scale(${scale})`, transformOrigin: "top left" }}>
-        <LogotypeColorImport />
-      </div>
-    </div>
-  );
-}
 
 export function GlobalNav() {
   const { locale, setLocale, t } = useLocale();
@@ -30,7 +17,7 @@ export function GlobalNav() {
         <div className="flex gap-6 h-[72px] items-center max-w-[1280px] mx-auto px-6">
           {/* Logo */}
           <div className="shrink-0">
-            <AiraviaLogotype height={24} />
+            <AiraviaLogo height={24} />
           </div>
 
           {/* Main nav links */}
@@ -82,7 +69,7 @@ export function GlobalNav() {
           <div className="absolute right-0 top-0 h-full w-72 bg-[#001f6b] flex flex-col" style={{ borderLeft: "1px solid rgba(255,255,255,0.1)" }}
             onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-              <AiraviaLogotype height={20} />
+              <AiraviaLogo height={20} />
               <button type="button" onClick={() => setMobileOpen(false)} className="text-white/60 hover:text-white"><X size={18} /></button>
             </div>
             <div className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-1">
