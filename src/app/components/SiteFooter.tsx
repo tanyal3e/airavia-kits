@@ -40,8 +40,8 @@ export function SiteFooter() {
         {/* Top: brand + 4 link columns */}
         <div className="flex gap-6 pb-8" style={{ borderBottom: "0.625px solid rgba(255,255,255,0.1)" }}>
           {/* Brand col */}
-          <div className="flex flex-col gap-2 w-[389px] shrink-0">
-            <AiraviaLogo height={24} />
+          <div className="flex flex-col items-start gap-2 w-[389px] shrink-0 text-left">
+            <AiraviaLogo height={20} />
             <p className="text-[14px] font-normal leading-[22.75px] text-white/50">{t("footer_tagline")}</p>
           </div>
           {/* Link columns */}

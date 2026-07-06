@@ -1,8 +1,8 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plane } from "lucide-react";
 import { useLocale } from "./i18n";
 import img1 from "../../imports/AiraviaWeb/3b2e0d50a282f8e51d4dce8549c0ef28982b5333.png";
-import img1overlay from "../../imports/AiraviaWeb/ddd0c0ea71afecfedaee0387e4a855d2b81a6e34.png";
+import img2 from "../../imports/AiraviaWeb/ddd0c0ea71afecfedaee0387e4a855d2b81a6e34.png";
 import img3 from "../../imports/AiraviaWeb/9dff36309149d3d14e9e61b232084c3f3297cffc.png";
 import img4 from "../../imports/AiraviaWeb/35796027b212d124e5be1d8ac48271ab721141d3.png";
 import img5 from "../../imports/AiraviaWeb/f92f48a45ebc38766c1f3bf20103313d7385408d.png";
@@ -11,9 +11,7 @@ import img5 from "../../imports/AiraviaWeb/f92f48a45ebc38766c1f3bf20103313d73854
 function PlaneIcon() {
   return (
     <div style={{ transform: "rotate(5deg)" }}>
-      <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
-        <path d="M1 5.5L4.5 2 10 7.5M1 5.5L3.5 6.5M1 5.5L2 8.5L5 7L6.5 10L10 7.5M10 7.5L11 5" stroke="#001F6B" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
+      <Plane size={12} className="text-[#001F6B]" strokeWidth={1.5} />
     </div>
   );
 }
@@ -32,11 +30,11 @@ type Route = {
   origin: string; originCity: string;
   dest: string; destCity: string;
   duration: string; price: string;
-  img: string; overlayImg?: string;
+  img: string;
 };
 
 const ROUTES: Route[] = [
-  { origin: "AMS", originCity: "Amsterdam", dest: "CDG", destCity: "Paris",     duration: "3h 20m",  price: "€140",   img: img1, overlayImg: img1overlay },
+  { origin: "AMS", originCity: "Amsterdam", dest: "CDG", destCity: "Paris",     duration: "3h 20m",  price: "€140",   img: img2 },
   { origin: "AMS", originCity: "Amsterdam", dest: "DXB", destCity: "Dubai",     duration: "6h 20m",  price: "€890",   img: img1 },
   { origin: "BRU", originCity: "Brussels",  dest: "SIN", destCity: "Singapore", duration: "12h 55m", price: "€1,460", img: img3 },
   { origin: "CDG", originCity: "Paris",     dest: "NRT", destCity: "Tokyo",     duration: "11h 40m", price: "€1,680", img: img4 },
@@ -50,9 +48,6 @@ function RouteCard({ route }: { route: Route }) {
       {/* Image */}
       <div className="relative h-[160px] shrink-0 overflow-hidden rounded-t">
         <img src={route.img} alt={route.destCity} className="absolute inset-0 w-full h-full object-cover" />
-        {route.overlayImg && (
-          <img src={route.overlayImg} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-        )}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,8,23,0.6)] to-transparent" />
         <div className="absolute bottom-3 left-3 bg-[#001f6b] rounded-sm px-2.5 py-0.5">
           <p className="text-[12px] font-semibold leading-4 text-white">Business</p>

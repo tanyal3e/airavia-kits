@@ -1,14 +1,5 @@
 import React from "react";
-import { ArrowRight, Star } from "lucide-react";
 import { useLocale } from "./i18n";
-
-function StarSVG() {
-  return (
-    <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
-      <path d="M7.5 1.25L9.297 5.514L13.929 5.977L10.5 9.148L11.545 13.75L7.5 11.387L3.455 13.75L4.5 9.148L1.071 5.977L5.703 5.514L7.5 1.25Z" stroke="#3D2800" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
 
 function LearnMoreArrow() {
   return (
@@ -30,7 +21,7 @@ export function MilesSection() {
   return (
     <section className="bg-[#001f6b] w-full shrink-0 py-14">
       <div className="max-w-[1280px] mx-auto px-6">
-        <div className="relative flex">
+        <div className="flex items-center justify-between gap-10 flex-wrap lg:flex-nowrap">
           {/* Left: copy block */}
           <div className="flex flex-col gap-6 w-full max-w-[592px]">
             <div>
@@ -38,18 +29,18 @@ export function MilesSection() {
               <h2 className="text-[30px] font-bold leading-[37.5px] tracking-[-0.6px] text-white mt-3">{t("miles_title")}</h2>
             </div>
             <p className="text-[16px] font-normal leading-[26px] text-white/70 max-w-[512px]">{t("miles_body")}</p>
-            <div className="flex items-center gap-0 relative h-12">
-              <button type="button" className="absolute left-0 top-0 inline-flex items-center gap-2 h-12 px-7 bg-[#C9A84C] text-[#3d2800] text-[16px] font-semibold rounded hover:bg-[#B8943D] transition-colors">
-                <StarSVG />{t("miles_join")}
+            <div className="flex items-center gap-6 flex-wrap">
+              <button type="button" className="inline-flex items-center gap-2 h-12 px-7 bg-[#C9A84C] text-[#3d2800] text-[16px] font-semibold rounded hover:bg-[#B8943D] transition-colors">
+                {t("miles_join")}
               </button>
-              <button type="button" className="absolute left-[229px] top-0 inline-flex items-center gap-2 h-12 px-7 text-[16px] font-semibold text-white/80 hover:text-white transition-colors">
+              <button type="button" className="inline-flex items-center gap-2 h-12 text-[16px] font-semibold text-white/80 hover:text-white transition-colors">
                 {t("miles_learn")}<LearnMoreArrow />
               </button>
             </div>
           </div>
 
           {/* Right: stats */}
-          <div className="hidden lg:flex items-start absolute right-0 top-[52px]">
+          <div className="hidden lg:flex items-center shrink-0">
             {stats.map((s) => (
               <div key={s.label}
                 className="flex flex-col items-center px-6 py-6 w-[195px]"

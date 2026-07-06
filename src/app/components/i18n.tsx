@@ -170,8 +170,8 @@ const dict: Record<Locale, Strings> = {
     chat_quick3: "Check-in status",
     smart_label: "AIRAVIA APP",
     smart_title: "Smart travel within your comfort",
-    smart_card_title: "Travel easy with Airavia",
-    smart_card_body: "Fully-flat beds, award-winning dining, and priority service across 40+ long-haul routes.",
+    smart_card_title: "Explore Airavia App",
+    smart_card_body: "Plan, book, manage and update your trips. All the personalized and self-service functions to help every journey planning go smoothly at your finger trips.",
     smart_card_cta: "Download now",
   },
   nl: {

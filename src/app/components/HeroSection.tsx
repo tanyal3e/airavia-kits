@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as Select from "@radix-ui/react-select";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Search, Calendar, ArrowLeftRight, ChevronDown, Check, Plane } from "lucide-react";
+import { format } from "date-fns";
+import { Search, Calendar as CalendarIcon, ArrowLeftRight, ChevronDown, Check, Plane, Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useLocale } from "./i18n";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Calendar } from "./ui/calendar";
 import imgHeroBg from "../../imports/AiraviaWeb/Hero.png";
 
 type Tab = "book" | "manage" | "status";
@@ -164,24 +167,100 @@ function FieldCell({ label, value, onChange, hasDivider, className = "" }: {
   );
 }
 
-function ReturnDateCell({ label, value, onChange, hasDivider }: {
-  label: string; value: string; onChange: (v: string) => void; hasDivider?: boolean;
+// ─── Depart/return range field — opens a two-month range calendar popover ──
+type DateRange = { from?: Date; to?: Date };
+
+function DateRangeField({ departLabel, returnLabel, range, onChange }: {
+  departLabel: string; returnLabel: string; range: DateRange; onChange: (r: DateRange | undefined) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const fmt = (d?: Date) => (d ? format(d, "d MMM") : "");
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button type="button" className="w-full flex items-stretch text-left">
+          <div className="relative flex-1 min-w-0">
+            <div className="absolute right-0 top-2 bottom-2 w-px bg-[rgba(0,31,107,0.12)]" />
+            <div className="flex flex-col gap-1 px-5 py-3.5">
+              <span className="text-[10px] font-bold uppercase tracking-[1px] text-[#5b6580] leading-none whitespace-nowrap">{departLabel}</span>
+              <span className="text-[15px] font-semibold text-[#09102b] truncate">{fmt(range.from)}</span>
+            </div>
+          </div>
+          <div className="relative flex-1 min-w-0">
+            <div className="flex flex-col gap-1 px-5 py-3.5">
+              <span className="text-[10px] font-bold uppercase tracking-[1px] text-[#5b6580] leading-none whitespace-nowrap">{returnLabel}</span>
+              <span className="flex items-center justify-between gap-2 text-[15px] font-semibold text-[#09102b] truncate">
+                {fmt(range.to)}
+                <CalendarIcon size={14} className="text-[#5b6580] shrink-0" />
+              </span>
+            </div>
+          </div>
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-auto p-0">
+        <Calendar
+          mode="range"
+          numberOfMonths={2}
+          defaultMonth={range.from}
+          selected={range}
+          onSelect={(r) => onChange(r)}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+// ─── Passengers field — Adults/Children steppers in a popover ──────────────
+function PassengerRow({ label, sub, value, min, max, onChange }: {
+  label: string; sub: string; value: number; min: number; max: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="relative flex-1 min-w-0">
-      {hasDivider && <div className="absolute right-0 top-2 bottom-2 w-px bg-[rgba(0,31,107,0.12)]" />}
-      <div className="flex flex-col gap-1 px-5 py-3.5">
-        <label className="text-[10px] font-bold uppercase tracking-[1px] text-[#5b6580] leading-none whitespace-nowrap">{label}</label>
-        <div className="flex items-center justify-between gap-2">
-          <input
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full bg-transparent text-[15px] font-semibold text-[#09102b] outline-none truncate"
-          />
-          <Calendar size={14} className="text-[#5b6580] shrink-0" />
-        </div>
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-sm font-semibold text-[#09102b]">{label}</p>
+        <p className="text-xs text-[#5b6580]">{sub}</p>
+      </div>
+      <div className="flex items-center gap-3">
+        <button type="button" disabled={value <= min} onClick={() => onChange(Math.max(min, value - 1))}
+          aria-label={`Decrease ${label}`}
+          className="w-7 h-7 flex items-center justify-center rounded-full border border-[rgba(0,31,107,0.2)] text-[#001f6b] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#E6ECF8] transition-colors">
+          <Minus size={12} />
+        </button>
+        <span className="w-4 text-center text-sm font-semibold text-[#09102b]">{value}</span>
+        <button type="button" disabled={value >= max} onClick={() => onChange(Math.min(max, value + 1))}
+          aria-label={`Increase ${label}`}
+          className="w-7 h-7 flex items-center justify-center rounded-full border border-[rgba(0,31,107,0.2)] text-[#001f6b] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#E6ECF8] transition-colors">
+          <Plus size={12} />
+        </button>
       </div>
     </div>
+  );
+}
+
+function PassengersField({ label, adults, childrenCount, onChange, hasDivider }: {
+  label: string; adults: number; childrenCount: number; onChange: (adults: number, children: number) => void; hasDivider?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const summary = `${adults} Adult${adults !== 1 ? "s" : ""}` + (childrenCount > 0 ? `, ${childrenCount} Child${childrenCount !== 1 ? "ren" : ""}` : "");
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button type="button" className="relative flex-1 min-w-0 w-full text-left">
+          {hasDivider && <div className="absolute right-0 top-2 bottom-2 w-px bg-[rgba(0,31,107,0.12)]" />}
+          <div className="flex flex-col gap-1 px-5 py-3.5">
+            <span className="text-[10px] font-bold uppercase tracking-[1px] text-[#5b6580] leading-none whitespace-nowrap">{label}</span>
+            <span className="text-[15px] font-semibold text-[#09102b] truncate">{summary}</span>
+          </div>
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-64 p-4">
+        <PassengerRow label="Adults" sub="Age 12+" value={adults} min={1} max={9} onChange={(v) => onChange(v, childrenCount)} />
+        <div className="h-px bg-[rgba(0,31,107,0.08)] my-3" />
+        <PassengerRow label="Children" sub="Age 0–11" value={childrenCount} min={0} max={8} onChange={(v) => onChange(adults, v)} />
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -218,11 +297,13 @@ function ClassSelect({ label, value, onChange, options, hasDivider }: {
 }
 
 // ─── Shared tab button styling ───────────────────────────────────────────────
+// Deselected tabs stay fully transparent so the hero photo shows through; only
+// the active tab gets an opaque fill.
 function tabClasses(active: boolean, extra = "") {
   return `px-5 sm:px-6 py-3 text-[11px] font-bold uppercase tracking-[0.8px] border-b-[3px] transition-colors ${extra} ${
     active
       ? "bg-[#EDF0F7] border-b-[#C9A84C] text-[#001f6b]"
-      : "bg-white/56 border-b-transparent text-[#5b6580] hover:bg-white/80 hover:text-[#001f6b]"
+      : "bg-transparent border-b-transparent text-white/80 hover:bg-white/10 hover:text-white"
   }`;
 }
 
@@ -235,9 +316,9 @@ function BookingWidget() {
   const [promoCode, setPromoCode] = useState("");
   const [origin, setOrigin] = useState(t("booking_origin_val"));
   const [destination, setDestination] = useState(t("booking_dest_val"));
-  const [depart, setDepart] = useState(t("booking_depart_val"));
-  const [returnDate, setReturnDate] = useState(t("booking_return_val"));
-  const [passengers, setPassengers] = useState(t("booking_passengers_val"));
+  const [dateRange, setDateRange] = useState<DateRange>({ from: new Date(2026, 6, 15), to: new Date(2026, 6, 22) });
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
   const [bookingRef, setBookingRef] = useState("");
   const [lastName, setLastName] = useState("");
   const [flightNo, setFlightNo] = useState("");
@@ -259,15 +340,15 @@ function BookingWidget() {
   const isMoreTab = tab === "manage" || tab === "status";
 
   return (
-    <div className="w-full max-w-[1280px] bg-[#EDF0F7] rounded shadow-[0_12px_28px_rgba(0,8,23,0.25)] overflow-visible">
-      {/* Tabs — deselected tabs get a semi-opaque white fill with muted text so they stay legible over any photo */}
-      <div className="flex border border-[rgba(0,31,107,0.12)] rounded-t overflow-hidden">
+    <div className="w-full max-w-[1280px] rounded shadow-[0_12px_28px_rgba(0,8,23,0.25)] overflow-visible">
+      {/* Tabs — fully transparent so the hero photo shows through; only the active tab is opaque */}
+      <div className="flex rounded-t overflow-hidden">
         <button type="button" onClick={() => setTab("book")}
-          className={tabClasses(tab === "book", "border-r border-r-[rgba(0,31,107,0.12)]")}>
+          className={tabClasses(tab === "book", "border-r border-r-white/15")}>
           {t("booking_tab_book")}
         </button>
         <button type="button" onClick={() => setTab("manage")}
-          className={`hidden sm:block ${tabClasses(tab === "manage", "border-r border-r-[rgba(0,31,107,0.12)]")}`}>
+          className={`hidden sm:block ${tabClasses(tab === "manage", "border-r border-r-white/15")}`}>
           {t("booking_tab_manage")}
         </button>
         <button type="button" onClick={() => setTab("status")}
@@ -297,6 +378,8 @@ function BookingWidget() {
         </DropdownMenu.Root>
       </div>
 
+      {/* Opaque panel below the tab strip — holds all tab content */}
+      <div className="bg-[#EDF0F7] rounded-b border border-[rgba(0,31,107,0.12)]">
       {tab === "book" && (
         <>
           {/* Trip type + promo (promo hidden on mobile to match compact layout) */}
@@ -358,14 +441,11 @@ function BookingWidget() {
                 </button>
                 <CityField label={t("booking_destination")} value={destination} onChange={setDestination} />
               </div>
-              <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
-                <FieldCell label={t("booking_depart")} value={depart} onChange={setDepart} />
+              <div className="col-span-2 bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
+                <DateRangeField departLabel={t("booking_depart")} returnLabel={t("booking_return")} range={dateRange} onChange={(r) => r && setDateRange(r)} />
               </div>
-              <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
-                <ReturnDateCell label={t("booking_return")} value={returnDate} onChange={setReturnDate} />
-              </div>
-              <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
-                <FieldCell label={t("booking_passengers")} value={passengers} onChange={setPassengers} />
+              <div className="col-span-2 bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
+                <PassengersField label={t("booking_passengers")} adults={adults} childrenCount={children} onChange={(a, c) => { setAdults(a); setChildren(c); }} />
               </div>
               <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px]">
                 <ClassSelect label={t("booking_class")} value={cabinClass} onChange={setCabinClass} options={classOptions} />
@@ -380,22 +460,21 @@ function BookingWidget() {
             {/* Desktop layout (lg+) — Origin/Destination merged, Depart/Return merged */}
             <div className="hidden lg:flex items-stretch gap-3">
               <div className="relative flex items-stretch bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px] flex-[1.8] min-w-[320px]">
-                <FieldCell label={t("booking_origin")} value={origin} onChange={setOrigin} />
+                <CityField label={t("booking_origin")} value={origin} onChange={setOrigin} />
                 <button type="button" onClick={swap}
                   className="flex items-center justify-center w-6 h-6 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-[rgba(0,31,107,0.15)] bg-white text-[#5b6580] hover:text-[#001f6b] hover:border-[#001f6b]/40 transition-colors z-10"
                   aria-label="Swap origin and destination">
                   <ArrowLeftRight size={11} />
                 </button>
-                <FieldCell label={t("booking_destination")} value={destination} onChange={setDestination} />
+                <CityField label={t("booking_destination")} value={destination} onChange={setDestination} />
               </div>
 
               <div className="flex items-stretch bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px] flex-[1.3] min-w-[240px]">
-                <FieldCell label={t("booking_depart")} value={depart} onChange={setDepart} hasDivider />
-                <ReturnDateCell label={t("booking_return")} value={returnDate} onChange={setReturnDate} />
+                <DateRangeField departLabel={t("booking_depart")} returnLabel={t("booking_return")} range={dateRange} onChange={(r) => r && setDateRange(r)} />
               </div>
 
               <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px] flex-1 min-w-[120px]">
-                <FieldCell label={t("booking_passengers")} value={passengers} onChange={setPassengers} />
+                <PassengersField label={t("booking_passengers")} adults={adults} childrenCount={children} onChange={(a, c) => { setAdults(a); setChildren(c); }} />
               </div>
 
               <div className="bg-white border border-[rgba(0,31,107,0.12)] rounded-[4px] flex-1 min-w-[120px]">
@@ -439,6 +518,7 @@ function BookingWidget() {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }

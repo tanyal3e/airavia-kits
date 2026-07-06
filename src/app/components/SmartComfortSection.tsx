@@ -28,8 +28,8 @@ export function SmartComfortSection() {
           </h2>
         </div>
 
-        {/* Full-width image card */}
-        <div className="relative h-[334px] w-full rounded overflow-hidden" style={{ border: "0.625px solid rgba(0,31,107,0.12)" }}>
+        {/* Full-width image banner */}
+        <div className="relative h-[334px] w-full rounded overflow-hidden">
           {/* Background lifestyle image */}
           <img
             src={imgApp}

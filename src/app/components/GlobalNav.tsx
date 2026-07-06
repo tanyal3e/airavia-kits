@@ -17,7 +17,7 @@ export function GlobalNav() {
         <div className="flex gap-6 h-[72px] items-center max-w-[1280px] mx-auto px-6">
           {/* Logo */}
           <div className="shrink-0">
-            <AiraviaLogo height={24} />
+            <AiraviaLogo height={20} />
           </div>
 
           {/* Main nav links */}
