@@ -23,19 +23,20 @@ const { t } = useLocale();
       <div class="relative h-[334px] w-full rounded overflow-hidden">
         <!-- Background lifestyle image -->
         <img :src="imgApp" alt="Airavia app lifestyle" class="absolute inset-0 w-full h-full object-cover" />
-        <!-- Phone detail — positioned and scaled -->
+        <!-- Phone detail — anchored to the left edge as a percentage-scaled layer, no longer assumes a fixed 1280px container -->
         <div class="absolute inset-0 overflow-hidden">
-          <div class="absolute" style="left: -304px; top: -87px; width: 1534px; height: 611px">
-            <img :src="imgPhone" alt="" class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-            <!-- Right-to-left gradient fade -->
-            <div class="absolute inset-0 bg-gradient-to-l from-[#edf0f7] from-[13.82%] to-[rgba(237,240,247,0)] to-[40.743%]" />
-          </div>
+          <img
+            :src="imgPhone"
+            alt=""
+            class="absolute left-0 top-1/2 -translate-y-1/2 h-[178%] w-auto max-w-none object-cover pointer-events-none"
+          />
+          <!-- Right-to-left gradient fade -->
+          <div class="absolute inset-0 bg-gradient-to-l from-[#edf0f7] from-[13.82%] to-[rgba(237,240,247,0)] to-[40.743%]" />
         </div>
 
-        <!-- Floating white info card -->
+        <!-- Floating white info card — anchored to the right edge, vertically centered; never depends on a fixed container width -->
         <div
-          class="absolute bg-white shadow-[0px_4px_7.5px_rgba(0,0,0,0.25)] flex flex-col justify-between p-6"
-          style="left: 742px; top: 51px; width: 488px; height: 207px"
+          class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-[calc(100%-2rem)] sm:w-[420px] max-w-[488px] bg-white shadow-[0px_4px_7.5px_rgba(0,0,0,0.25)] flex flex-col justify-between gap-4 p-6"
         >
           <div class="flex flex-col gap-3">
             <h3 class="text-[18px] font-semibold leading-7 text-[#09102b]">

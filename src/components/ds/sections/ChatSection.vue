@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { Bot, Bell } from "@lucide/vue";
+import { Bell } from "@lucide/vue";
 import Section from "../Section.vue";
 import SectionLabel from "../SectionLabel.vue";
 import ChatUI from "../ChatUI.vue";
 import Badge from "../Badge.vue";
 import Btn from "../Btn.vue";
+import AiraviaMark from "../../AiraviaMark.vue";
 
 const quickReplies = ["Check my flight status", "Upgrade my seat", "Add baggage", "Rebook flight", "Talk to an agent"];
 </script>
@@ -17,8 +18,8 @@ const quickReplies = ["Check my flight status", "Upgrade my seat", "Add baggage"
         <div>
           <SectionLabel>Inline Assistant Card</SectionLabel>
           <div class="bg-card border border-border rounded p-4 flex gap-3 items-start">
-            <div class="w-7 h-7 rounded-full bg-[#001F6B] flex items-center justify-center shrink-0">
-              <Bot :size="14" class="text-white" />
+            <div class="w-7 h-7 rounded-full bg-[#C9A84C] flex items-center justify-center shrink-0">
+              <AiraviaMark :size="14" color="#001F6B" />
             </div>
             <div>
               <p class="text-xs font-semibold text-[#001F6B] mb-1">Sky · Airavia Assistant</p>
@@ -33,8 +34,10 @@ const quickReplies = ["Check my flight status", "Upgrade my seat", "Add baggage"
         <div>
           <SectionLabel>Floating Chat Button</SectionLabel>
           <button type="button" class="flex items-center gap-2 bg-[#001F6B] text-white px-4 py-2.5 rounded-full shadow-lg text-sm font-semibold hover:bg-[#002B8F] transition-colors">
-            <Bot :size="14" />
-            Chat with Sky
+            <div class="w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center shrink-0">
+              <AiraviaMark :size="10" color="#001F6B" />
+            </div>
+            Ask Sky
             <span class="w-2 h-2 rounded-full bg-[#2EC074]" />
           </button>
         </div>

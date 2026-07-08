@@ -179,7 +179,7 @@ function tabClasses(active: boolean, extra = "") {
               <button
                 type="button"
                 aria-label="Swap origin and destination"
-                class="absolute -top-[14px] right-4 flex items-center justify-center w-7 h-7 rounded-full border border-[rgba(0,31,107,0.15)] bg-white text-[#5b6580] hover:text-[#001f6b] hover:border-[#001f6b]/40 transition-colors shadow-sm z-10"
+                class="absolute -top-[14px] right-4 flex items-center justify-center w-7 h-7 rounded-full border-2 border-[#001f6b]/25 bg-white text-[#001f6b] hover:text-white hover:bg-[#001f6b] hover:border-[#001f6b] transition-colors shadow-md z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#001f6b]/40 focus-visible:ring-offset-2"
                 @click="swap"
               >
                 <ArrowLeftRight :size="12" class="rotate-90" />
@@ -210,7 +210,7 @@ function tabClasses(active: boolean, extra = "") {
               <CityField :label="t('booking_origin')" v-model="origin" />
               <button
                 type="button"
-                class="flex items-center justify-center w-6 h-6 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-[rgba(0,31,107,0.15)] bg-white text-[#5b6580] hover:text-[#001f6b] hover:border-[#001f6b]/40 transition-colors z-10"
+                class="flex items-center justify-center w-7 h-7 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-[#001f6b]/25 bg-white text-[#001f6b] hover:text-white hover:bg-[#001f6b] hover:border-[#001f6b] transition-colors shadow-md z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#001f6b]/40 focus-visible:ring-offset-2"
                 aria-label="Swap origin and destination"
                 @click="swap"
               >

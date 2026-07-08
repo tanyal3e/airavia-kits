@@ -12,8 +12,8 @@ const { t } = useLocale();
 
 const ROUTES: Route[] = [
   { origin: "AMS", originCity: "Amsterdam", dest: "CDG", destCity: "Paris", duration: "3h 20m", price: "€140", img: img2 },
-  { origin: "AMS", originCity: "Amsterdam", dest: "DXB", destCity: "Dubai", duration: "6h 20m", price: "€890", img: img1 },
-  { origin: "BRU", originCity: "Brussels", dest: "SIN", destCity: "Singapore", duration: "12h 55m", price: "€1,460", img: img3 },
+  { origin: "AMS", originCity: "Amsterdam", dest: "DXB", destCity: "Dubai", duration: "6h 30m", price: "€890", img: img1 },
+  { origin: "BRU", originCity: "Brussels", dest: "SIN", destCity: "Singapore", duration: "13h 50m", price: "€1,460", img: img3 },
   { origin: "CDG", originCity: "Paris", dest: "NRT", destCity: "Tokyo", duration: "11h 40m", price: "€1,680", img: img4 },
   { origin: "AMS", originCity: "Amsterdam", dest: "GRU", destCity: "São Paulo", duration: "11h 30m", price: "€1,100", img: img5 },
 ];

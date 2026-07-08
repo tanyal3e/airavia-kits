@@ -57,6 +57,20 @@ const faq = [
         </TabsRoot>
       </div>
       <div>
+        <SectionLabel>Tabs — Booking (Filled Underline)</SectionLabel>
+        <div class="flex rounded-t overflow-hidden bg-[#001F6B]">
+          <button type="button" class="px-5 sm:px-6 py-3 text-[11px] font-bold uppercase tracking-[0.8px] border-b-[3px] border-r border-r-white/15 bg-[#EDF0F7] border-b-[#C9A84C] text-[#001f6b]">
+            Book
+          </button>
+          <button type="button" class="px-5 sm:px-6 py-3 text-[11px] font-bold uppercase tracking-[0.8px] border-b-[3px] border-r border-r-white/15 bg-transparent border-b-transparent text-white/80 hover:bg-white/10 hover:text-white transition-colors">
+            Manage Booking
+          </button>
+          <button type="button" class="px-5 sm:px-6 py-3 text-[11px] font-bold uppercase tracking-[0.8px] border-b-[3px] bg-transparent border-b-transparent text-white/80 hover:bg-white/10 hover:text-white transition-colors">
+            Flight Status
+          </button>
+        </div>
+      </div>
+      <div>
         <SectionLabel>Breadcrumbs</SectionLabel>
         <div class="flex items-center gap-1.5 text-sm flex-wrap">
           <span v-for="(c, i) in breadcrumbs" :key="c" class="flex items-center gap-1.5">

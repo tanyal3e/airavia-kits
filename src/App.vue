@@ -3,7 +3,7 @@ import { ref, onUnmounted, watch } from "vue";
 import {
   Menu, Globe, Blocks, PanelLeftClose, PanelLeftOpen,
   Palette, Type, MousePointer, Tag, ListChecks, LayoutGrid,
-  AlertTriangle, Compass, MessageSquare, Sparkles, MoreHorizontal,
+  AlertTriangle, Compass, MessageSquare, Sparkles, MoreHorizontal, Zap,
 } from "@lucide/vue";
 import Toaster from "./components/Toaster.vue";
 import AiraviaLogo from "./components/AiraviaLogo.vue";
@@ -24,6 +24,7 @@ const NAV_SECTIONS = [
   { id: "chat", label: "Conversational UI", icon: MessageSquare },
   { id: "mascot", label: "Mascot", icon: Sparkles },
   { id: "misc", label: "Misc", icon: MoreHorizontal },
+  { id: "animation", label: "Animation", icon: Zap },
 ];
 
 const view = ref<AppView>("ds");

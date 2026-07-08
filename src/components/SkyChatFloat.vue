@@ -2,6 +2,7 @@
 import { ref, computed, watch, nextTick } from "vue";
 import { Bot, X, Send, Paperclip, Smile, Mic } from "@lucide/vue";
 import { useLocale } from "@/composables/useLocale";
+import AiraviaMark from "./AiraviaMark.vue";
 
 type Msg = { id: number; role: "user" | "bot"; text: string; time: string };
 
@@ -60,7 +61,7 @@ const quickReplies = computed(() => [t("chat_quick1"), t("chat_quick2"), t("chat
     @click="open = true"
   >
     <div class="w-6 h-6 rounded-full bg-[#C9A84C] flex items-center justify-center">
-      <Bot :size="13" class="text-[#001F6B]" />
+      <AiraviaMark :size="12" color="#001F6B" />
     </div>
     Ask Sky
     <span class="w-2 h-2 rounded-full bg-[#2EC074]" />

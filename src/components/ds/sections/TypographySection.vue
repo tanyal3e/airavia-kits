@@ -2,7 +2,8 @@
 import Section from "../Section.vue";
 
 const items = [
-  { label: "Display", size: "text-5xl", weight: "font-bold", text: "Paris CDG · Terminal 2E", desc: "48px · 700" },
+  { label: "Display L", size: "text-[69px]", weight: "font-bold", text: "Paris CDG · Terminal 2E", desc: "69px · 700" },
+  { label: "Display L", size: "text-5xl", weight: "font-bold", text: "Paris CDG · Terminal 2E", desc: "48px · 700" },
   { label: "Heading 1", size: "text-3xl", weight: "font-bold", text: "Book your next adventure", desc: "30px · 700" },
   { label: "Heading 2", size: "text-2xl", weight: "font-semibold", text: "Upcoming Flights", desc: "24px · 600" },
   { label: "Heading 3", size: "text-xl", weight: "font-semibold", text: "Seat Selection", desc: "20px · 600" },
@@ -18,7 +19,7 @@ const items = [
 <template>
   <Section id="typography" title="Typography" subtitle="Hanken Grotesk — a humanist grotesque optimised for aviation UI legibility.">
     <div class="space-y-1">
-      <div v-for="t in items" :key="t.label" class="flex items-baseline gap-6 py-4 border-b border-border last:border-0">
+      <div v-for="t in items" :key="`${t.label}-${t.desc}`" class="flex items-baseline gap-6 py-4 border-b border-border last:border-0">
         <div class="w-28 shrink-0">
           <p class="text-xs font-semibold text-muted-foreground">{{ t.label }}</p>
           <p class="font-[JetBrains_Mono,monospace] text-[10px] text-muted-foreground/60 mt-0.5">{{ t.desc }}</p>

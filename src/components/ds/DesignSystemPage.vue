@@ -12,6 +12,7 @@ import NavigationSection from "./sections/NavigationSection.vue";
 import ChatSection from "./sections/ChatSection.vue";
 import MascotSection from "./sections/MascotSection.vue";
 import MiscSection from "./sections/MiscSection.vue";
+import AnimationSection from "./sections/AnimationSection.vue";
 </script>
 
 <template>
@@ -44,6 +45,7 @@ import MiscSection from "./sections/MiscSection.vue";
     <ChatSection />
     <MascotSection />
     <MiscSection />
+    <AnimationSection />
 
     <!-- Footer -->
     <footer class="pt-10 pb-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground border-t border-border">

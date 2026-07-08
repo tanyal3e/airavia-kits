@@ -10,25 +10,25 @@ const COLS_EN: FooterCol[] = [
   { heading: "About Airavia", links: ["Our Story", "Leadership", "Careers", "Sustainability", "FlyGO"] },
   { heading: "Our Routes", links: ["Flights to Barcelona", "Flights to Tokyo", "Flights to Copenhagen", "Flights to Amsterdam", "All Routes"] },
   { heading: "Business & Corporate", links: ["Corporate Programs", "Group Travel", "Travel Agents", "Partnership"] },
-  { heading: "Stay Informed", links: ["Customer Support", "Newsletter", "Airavia App", "Flight Status", "Payments & Refunds", "Contact Us"] },
+  { heading: "Stay Informed", links: ["Customer Support", "Newsletter", "Airavia App", "Flight Status", "Payments & Refunds"] },
 ];
 const COLS_NL: FooterCol[] = [
   { heading: "Over Airavia", links: ["Ons Verhaal", "Leiderschap", "Vacatures", "Duurzaamheid", "FlyGO"] },
   { heading: "Onze Routes", links: ["Vluchten naar Barcelona", "Vluchten naar Tokyo", "Vluchten naar Kopenhagen", "Vluchten naar Amsterdam", "Alle Routes"] },
   { heading: "Zakelijk & Corporate", links: ["Corporate Programma's", "Groepsreizen", "Reisagenten", "Partnerschap"] },
-  { heading: "Op de Hoogte Blijven", links: ["Klantenservice", "Nieuwsbrief", "Airavia App", "Vluchtstatus", "Betalingen & Terugbetalingen", "Contact"] },
+  { heading: "Op de Hoogte Blijven", links: ["Klantenservice", "Nieuwsbrief", "Airavia App", "Vluchtstatus", "Betalingen & Terugbetalingen"] },
 ];
 const COLS_DE: FooterCol[] = [
   { heading: "Über Airavia", links: ["Unsere Geschichte", "Führungsteam", "Karriere", "Nachhaltigkeit", "FlyGO"] },
   { heading: "Unsere Routen", links: ["Flüge nach Barcelona", "Flüge nach Tokio", "Flüge nach Kopenhagen", "Flüge nach Amsterdam", "Alle Routen"] },
   { heading: "Business & Corporate", links: ["Corporate-Programme", "Gruppenreisen", "Reisebüros", "Partnerschaft"] },
-  { heading: "Bleiben Sie Informiert", links: ["Kundendienst", "Newsletter", "Airavia App", "Flugstatus", "Zahlungen & Rückerstattungen", "Kontakt"] },
+  { heading: "Bleiben Sie Informiert", links: ["Kundendienst", "Newsletter", "Airavia App", "Flugstatus", "Zahlungen & Rückerstattungen"] },
 ];
 const COLS_FR: FooterCol[] = [
   { heading: "À propos d'Airavia", links: ["Notre Histoire", "Direction", "Carrières", "Durabilité", "FlyGO"] },
   { heading: "Nos Routes", links: ["Vols vers Barcelone", "Vols vers Tokyo", "Vols vers Copenhague", "Vols vers Amsterdam", "Toutes les routes"] },
   { heading: "Entreprises & Corporate", links: ["Programmes Entreprises", "Voyages de Groupe", "Agences de Voyage", "Partenariat"] },
-  { heading: "Restez Informé", links: ["Service Client", "Newsletter", "Application Airavia", "Statut de Vol", "Paiements et Remboursements", "Nous Contacter"] },
+  { heading: "Restez Informé", links: ["Service Client", "Newsletter", "Application Airavia", "Statut de Vol", "Paiements et Remboursements"] },
 ];
 const COLS_MAP: Record<Locale, FooterCol[]> = { en: COLS_EN, nl: COLS_NL, de: COLS_DE, fr: COLS_FR };
 
