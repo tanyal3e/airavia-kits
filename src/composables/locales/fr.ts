@@ -82,6 +82,6 @@ export const fr: Strings = {
   smart_label: "APPLICATION AIRAVIA",
   smart_title: "Voyagez intelligemment dans votre confort",
   smart_card_title: "Voyagez facilement avec Airavia",
-  smart_card_body: "Lits complètement plats, gastronomie primée et service prioritaire sur 40+ routes long-courriers.",
+  smart_card_body: "Planifiez, réservez, gérez et modifiez vos voyages. Toutes les fonctions personnalisées et en libre-service pour que chaque planification de voyage se déroule sans accroc, à portée de main.",
   smart_card_cta: "Télécharger maintenant",
 };

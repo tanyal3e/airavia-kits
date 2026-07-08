@@ -82,6 +82,6 @@ export const nl: Strings = {
   smart_label: "AIRAVIA APP",
   smart_title: "Slim reizen in uw comfort",
   smart_card_title: "Gemakkelijk reizen met Airavia",
-  smart_card_body: "Volledig platte bedden, bekroonde catering en prioriteitsservice op 40+ langeafstandsroutes.",
+  smart_card_body: "Plan, boek, beheer en wijzig uw reizen. Alle gepersonaliseerde en selfservice-functies om elke reisplanning soepel te laten verlopen, binnen handbereik.",
   smart_card_cta: "Nu downloaden",
 };
